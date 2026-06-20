@@ -543,11 +543,11 @@ class Project extends HXProject
 
     flair();
 
+    displayTarget();
+
     configureApp();
 
     configureOutputDir();
-
-    displayTarget();
 
     if (isRun() || isInstall())
     {
