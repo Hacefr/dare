@@ -2503,7 +2503,13 @@ class Project extends HXProject
     info('Compressing ASTC textures...');
 
     var args:Array<String> = ['run', 'astc-compressor', 'compress-from-json'];
+
     args = args.concat(['-json', './astc-compression-data.json']);
+
+    if (isCleanFlag())
+    {
+      args = args.concat(['-clean']);
+    }
 
     Sys.command('haxelib', args);
 
