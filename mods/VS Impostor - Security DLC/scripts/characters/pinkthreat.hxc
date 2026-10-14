@@ -1,0 +1,14 @@
+import funkin.play.character.AnimateAtlasCharacter;
+
+class PinkThreat extends AnimateAtlasCharacter
+{
+    public function new()
+    {
+        super('pinkthreat');
+    }
+
+    override public function playSingAnimation(dir:NoteDirection, miss:Bool = false, ?suffix:String = '')
+    {
+        super.playSingAnimation(dir, miss, this.idleSuffix == '-bruh' ? 'alt' : suffix);
+    }
+}

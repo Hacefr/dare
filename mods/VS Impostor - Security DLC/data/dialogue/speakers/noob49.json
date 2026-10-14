@@ -1,0 +1,29 @@
+{
+    "name": "Noob49",
+    "side": 0,
+    "asset": "noob49",
+    "boxColor": [90, 91, 123],
+    "boxShadeColor": [40, 44, 79], 
+    "icon": "noob49",
+    "sound": "noob49",
+    "animations": [
+        {
+        "anim": "normal",
+        "name": "noob49 normal",
+        "loop": false,
+        "offsets": [0,60]
+        },
+        {
+        "anim": "sad",
+        "name": "noob49 sad",
+        "loop": false,
+        "offsets": [0,60]
+        },
+        {
+        "anim": "happy",
+        "name": "noob49 happy",
+        "loop": false,
+        "offsets": [0,60]
+        }
+    ]
+}

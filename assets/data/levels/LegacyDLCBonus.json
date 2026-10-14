@@ -1,0 +1,14 @@
+{
+    "version": "1.0.0",
+    "name": "Somewhere Else",
+    "titleAsset": "storymenu/titles/extra",
+  "capsule": {
+    "name": "Bonus"
+  },
+    "visible": false,
+    "props": [],
+    "background": "#FFFFFF",
+    "songs": [
+        "trot-away", "triple-threat"
+    ]
+}

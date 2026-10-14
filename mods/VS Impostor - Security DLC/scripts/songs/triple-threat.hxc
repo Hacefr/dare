@@ -1,0 +1,282 @@
+import funkin.play.song.Song;
+import funkin.play.PlayState;
+import flixel.FlxSprite;
+import funkin.Paths;
+import flixel.tweens.FlxEase;
+
+class TripleThreatSong extends Song
+{
+    public function new()
+    {
+        super('triple-threat');
+    }
+
+    public var flashback:FlxSprite;
+    public var logo:FlxSprite;
+    var defaultCamZoom:Float;
+
+    function onCountdownStart(event)
+    {
+        super.onCountdownStart(event);
+
+        flashback = new FlxSprite(0, 0);
+	flashback.frames = Paths.getSparrowAtlas('tt/flashbacks');
+	flashback.animation.addByPrefix('1', 's0001', 1, false);
+	flashback.animation.addByPrefix('2', 's0002', 1, false);
+	flashback.animation.addByPrefix('3', 's0003', 1, false);
+	flashback.animation.addByPrefix('4', 's0004', 1, false);
+	flashback.animation.addByPrefix('5', 's0005', 1, false);
+	flashback.animation.addByPrefix('6', 's0006', 1, false);
+	flashback.animation.addByPrefix('7', 's0007', 1, false);
+	flashback.animation.addByPrefix('8', 's0008', 1, false);
+	flashback.animation.addByPrefix('9', 's0009', 1, false);
+	flashback.scale.set(1.2, 1.2);
+	flashback.camera = PlayState.instance.camCutscene;
+	flashback.alpha = 0.001;
+	
+	logo = new FlxSprite(0, 0, Paths.image('tt/triplethreat'));
+	logo.camera = PlayState.instance.camCutscene;
+	logo.alpha = 0.001;
+	
+	flashback.screenCenter();
+	logo.screenCenter();
+	
+	logo.setPosition(Math.round(logo.x), Math.round(logo.y));
+    }
+
+function onStepHit(event)
+{
+    super.onStepHit(event);
+
+    switch (event.step)
+    {
+        case 1:
+            defaultCamZoom = 0.5;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 6.5, true, FlxEase.quadInOut);
+
+        case 132:
+            defaultCamZoom = 0.55;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 2, true, FlxEase.quadOut);
+
+        case 240:
+            defaultCamZoom = 0.5;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 260:
+            defaultCamZoom = 0.52;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+        case 320:
+            defaultCamZoom = 0.5;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 2, true, FlxEase.quadOut);
+
+        case 384:
+            defaultCamZoom = 0.55;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 416:
+            defaultCamZoom = 0.5;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.8, true, FlxEase.quadOut);
+
+        case 448:
+            defaultCamZoom = 0.52;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 513:
+            defaultCamZoom = 0.5;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 612:
+            defaultCamZoom = 0.6;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 2, true, FlxEase.quadInOut);
+            LegacyUtils.camSpecialThing([700, 600], [950, 580]);
+
+        case 644:
+            defaultCamZoom = 0.65;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+            LegacyUtils.camSpecialThing([720, 620], [950, 600]);
+
+        case 680:
+            defaultCamZoom = 0.7;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+        case 900:
+            defaultCamZoom = 0.5;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+        case 1000:
+            defaultCamZoom = 0.55;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+            LegacyUtils.camSpecialThing([600, 550], [1200, 550]);
+
+        case 1032:
+            PlayState.instance.tweenCameraZoom(0.58, 0.2, true, FlxEase.quadOut);
+
+        case 1036:
+            PlayState.instance.tweenCameraZoom(0.58, 0.2, true, FlxEase.quadOut);
+
+        case 1040:
+            PlayState.instance.tweenCameraZoom(0.58, 0.2, true, FlxEase.quadOut);
+
+        case 1044:
+            PlayState.instance.tweenCameraZoom(0.58, 0.2, true, FlxEase.quadOut);
+
+        case 1048:
+            defaultCamZoom = 0.5;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+            LegacyUtils.camSpecialThing([600, 550], [950, 550]);
+
+        case 1064:
+            defaultCamZoom = 0.49;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 1072:
+            PlayState.instance.tweenCameraZoom(0.51, 0.2, true, FlxEase.quadOut);
+
+        case 1076:
+            PlayState.instance.tweenCameraZoom(0.51, 0.5, true, FlxEase.quadOut);
+
+        case 1096:
+            defaultCamZoom = 0.51;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 1112:
+            PlayState.instance.tweenCameraZoom(0.49, 0.2, true, FlxEase.quadOut);
+
+        case 1116:
+            PlayState.instance.tweenCameraZoom(0.49, 0.2, true, FlxEase.quadOut);
+
+        case 1120:
+            PlayState.instance.tweenCameraZoom(0.49, 0.2, true, FlxEase.quadOut);
+
+        case 1128:
+            defaultCamZoom = 0.5;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 1192:
+            defaultCamZoom = 0.51;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 1288:
+            defaultCamZoom = 0.55;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 1308:
+            defaultCamZoom = 0.65;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadIn);
+            LegacyUtils.camSpecialThing([500, 650], [950, 550]);
+
+        case 1320:
+            defaultCamZoom = 0.5;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 2, true, FlxEase.quadOut);
+
+        case 1544:
+            PlayState.instance.tweenCameraZoom(0.52, 0.2, true, FlxEase.quadOut);
+
+        case 1548:
+            PlayState.instance.tweenCameraZoom(0.52, 0.2, true, FlxEase.quadOut);
+
+        case 1552:
+            PlayState.instance.tweenCameraZoom(0.52, 0.2, true, FlxEase.quadOut);
+
+        case 1556:
+            PlayState.instance.tweenCameraZoom(0.52, 0.2, true, FlxEase.quadOut);
+
+        case 1561:
+            defaultCamZoom = 0.52;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 1576:
+            defaultCamZoom = 0.5;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 1704:
+            defaultCamZoom = 0.55;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+            LegacyUtils.camSpecialThing([500, 550], [1000, 550]);
+
+        case 1768:
+            defaultCamZoom = 0.5;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 2, true, FlxEase.quadOut);
+            LegacyUtils.camSpecialThing([700, 550], [1000, 550]);
+
+        case 1800:
+            PlayState.instance.tweenCameraZoom(0.52, 0.2, true, FlxEase.quadOut);
+
+        case 1804:
+            PlayState.instance.tweenCameraZoom(0.52, 0.2, true, FlxEase.quadOut);
+
+        case 1808:
+            PlayState.instance.tweenCameraZoom(0.52, 0.2, true, FlxEase.quadOut);
+
+        case 1812:
+            PlayState.instance.tweenCameraZoom(0.52, 0.2, true, FlxEase.quadOut);
+
+        case 1816:
+            defaultCamZoom = 0.55;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+            LegacyUtils.camSpecialThing([500, 550], [1200, 550]);
+
+        case 1832:
+            defaultCamZoom = 0.59;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 1846:
+            defaultCamZoom = 0.8;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 15, true, FlxEase.quadInOut);
+            LegacyUtils.camSpecialThing([500, 550], [1400, 600]);
+
+        case 2064:
+            PlayState.instance.cancelCameraZoomTween();
+            defaultCamZoom = 0.7;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+            LegacyUtils.camSpecialThing([500, 550], [1300, 550]);
+
+        case 2073:
+            defaultCamZoom = 1.3;
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 2, true, FlxEase.quadOut);
+            LegacyUtils.camSpecialThing([500, 550], [1700, 100]);
+
+        case 2088:
+            PlayState.instance.camGame.visible = PlayState.instance.camHUD.visible = false;
+            LegacyUtils.camSpecialThing([1700, 100], [1700, 100]);
+
+            PlayState.instance.add(flashback);
+            PlayState.instance.add(logo);
+
+        case 2104:
+            flashback.alpha = 1;
+            flashback.animation.play('1', true);
+
+        case 2136:
+            flashback.animation.play('2', true);
+
+        case 2168:
+            flashback.animation.play('3', true);
+
+        case 2184:
+            flashback.animation.play('4', true);
+
+        case 2200:
+            flashback.animation.play('5', true);
+
+        case 2232:
+            flashback.animation.play('6', true);
+
+        case 2264:
+            flashback.animation.play('7', true);
+
+        case 2296:
+            flashback.animation.play('8', true);
+
+        case 2328:
+            flashback.animation.play('9', true);
+
+        case 2344:
+            flashback.alpha = 0.001;
+
+        case 2360:
+            logo.alpha = 1;
+    }
+}
+}

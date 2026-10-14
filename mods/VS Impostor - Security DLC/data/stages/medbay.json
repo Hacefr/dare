@@ -1,0 +1,152 @@
+{
+ "version": "1.0.2",
+ "name": "Medbay",
+ "props": [
+  {
+   "assetPath": "BG/medbay/wall",
+   "atlasSettings": null,
+   "name": "bg",
+   "position": [-300, -100],
+   "scale": 1,
+   "startingAnimation": ""
+  },
+  {
+   "assetPath": "BG/medbay/shelf",
+   "atlasSettings": null,
+   "name": "shelf",
+   "position": [358, 290],
+   "scale": 1,
+   "scroll": [0.99, 1],
+   "startingAnimation": "",
+   "zIndex": 1
+  },
+  {
+   "assetPath": "BG/medbay/bloody",
+   "atlasSettings": null,
+   "blend": "multiply",
+   "name": "bloody",
+   "position": [-300, -100],
+   "scale": [
+	2,
+	1
+],
+   "startingAnimation": "",
+   "zIndex": 2
+  },
+  {
+   "assetPath": "#000000",
+   "atlasSettings": null,
+   "name": "loBlack",
+   "position": [0, 0],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 3
+  },
+  {
+   "assetPath": "#FF0000",
+   "atlasSettings": null,
+   "name": "blooodfuckkk",
+   "blend": "multiply",
+   "position": [0, 0],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 350
+  },
+  {
+   "assetPath": "BG/medbay/kakosfriend",
+   "atlasSettings": null,
+   "name": "guy2",
+   "position": [-350, 760],
+   "scale": 1,
+   "scroll": [1.05, 1],
+   "startingAnimation": "",
+   "zIndex": 351
+  },
+  {
+   "assetPath": "BG/medbay/gilbert",
+   "atlasSettings": null,
+   "name": "guy3",
+   "position": [1330, 650],
+   "scale": 1,
+   "scroll": [1.05, 1],
+   "startingAnimation": "",
+   "zIndex": 352
+  },
+  {
+   "animations": [
+    {
+     "animType": null,
+     "assetPath": null,
+     "atlasSettings": null,
+     "looped": true,
+     "name": "off",
+     "prefix": "lightsoff",
+     "renderType": null
+    },
+    {
+     "animType": null,
+     "assetPath": null,
+     "atlasSettings": null,
+     "looped": true,
+     "name": "on",
+     "prefix": "lightson",
+     "renderType": null
+    }
+   ],
+   "assetPath": "BG/medbay/lights",
+   "atlasSettings": null,
+   "name": "light",
+   "position": [1200, -140],
+   "scale": 1,
+   "scroll": [1.1, 1.1],
+   "startingAnimation": "lightson",
+   "zIndex": 353
+  },
+  {
+   "assetPath": "BG/medbay/bloody",
+   "atlasSettings": null,
+   "blend": "subtract",
+   "name": "bloody2",
+   "position": [-300, -100],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 354
+  },
+  {
+   "assetPath": "BG/medbay/vignette",
+   "atlasSettings": null,
+   "name": "vignette",
+   "position": [-300, -100],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 355
+  },
+  {
+   "assetPath": "#000000",
+   "atlasSettings": null,
+   "name": "loBlack2",
+   "position": [0, 0],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 356
+  }
+ ],
+ "characters": {
+  "bf": {
+   "cameraOffsets": [-100, -100],
+   "position": [1286, 875],
+   "zIndex": 300
+  },
+  "dad": {
+   "cameraOffsets": [150, -100],
+   "position": [351.5, 928],
+   "zIndex": 200
+  },
+  "gf": {
+   "cameraOffsets": [0, 0],
+   "position": [1556.5, 741],
+   "zIndex": 100
+  }
+ },
+ "cameraZoom": 0.7
+}

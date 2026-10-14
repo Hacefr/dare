@@ -1,0 +1,16 @@
+{
+	"title": "VS Impostor - Security DLC",
+	"description": "A Port of the Security DLC",
+	"contributors": [
+	{
+		"name": "KT_Gameplay",
+		"role": "Porter and Scripter"
+	},
+	{
+		"name": "jarekboho",
+		"role": "Script fixer"
+	}],
+	"api_version":"0.8.5",
+	"mod_version":"1.0.2",
+	"license":"CC BY 4.0,MIT"
+}

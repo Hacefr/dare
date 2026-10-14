@@ -1,0 +1,70 @@
+{
+	"renderType": "animateatlas",
+	"version": "1.0.1",
+	"offsets": [
+		0,
+		0
+	],
+	"danceEvery": 1,
+	"scale": 1,
+	"name": "gfweird",
+	"cameraOffsets": [
+		0,
+		0
+	],
+	"flipX": false,
+	"isPixel": false,
+	"singTime": 6,
+	"startingAnimation": "danceRight",
+	"healthIcon": {
+		"id": "gfweird",
+		"isPixel": false
+	},
+	"assetPath": "shared:characters/gf/cosmicube/gf weird",
+	"animations": [
+		{
+			"frameIndices": [],
+			"prefix": "idleleft",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "danceLeft",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "idleright",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "danceRight",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "gf sad",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "sad",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "gf cheer",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "cheer",
+			"looped": false
+		}
+	]
+}

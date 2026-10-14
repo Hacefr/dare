@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="icon-horsemate.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="idle0000" x="0" y="0" width="167" height="100" frameX="-2" frameY="-26" frameWidth="175" frameHeight="150"/>
+	<SubTexture name="losing0000" x="167" y="0" width="160" height="97" frameX="-3" frameY="-30" frameWidth="175" frameHeight="150"/>
+</TextureAtlas>

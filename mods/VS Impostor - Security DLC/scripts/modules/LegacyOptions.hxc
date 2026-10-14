@@ -1,0 +1,69 @@
+import funkin.modding.module.Module;
+import Std;
+import funkin.ui.options.OptionsState;
+import funkin.save.Save;
+import funkin.play.PlayState;
+import funkin.Preferences;
+import flixel.FlxG;
+
+class LegacyOptions extends Module
+{
+    var save = null;
+
+    var enabled:Bool = true;
+
+    function bindSave(){
+        save = Save.instance;
+    }
+
+    function new(){
+        super("LegacyOptions");
+        bindSave();
+
+        if(save.modOptions["Shaders"] == null)
+            save.modOptions["Shaders"] = true;
+
+        if(save.modOptions["Low Quality"] == null)
+            save.modOptions["Low Quality"] = false;
+
+        if(save.modOptions["Anti-Aliasing"] == null)
+            save.modOptions["Anti-Aliasing"] = true;
+    }
+
+
+    var inOptions:Bool = false;
+
+    override function onUpdate(event){
+        super.onUpdate(event);
+        for(cam in FlxG.cameras.list)
+        {
+            if(cam == null) continue;
+            cam.antialiasing = save.modOptions["Anti-Aliasing"];
+        }
+    }
+
+    override function onStateChangeEnd(event){
+        super.onStateChangeEnd(event);
+        if(Std.isOfType(event.targetState, OptionsState))
+        {
+            var prefs = event.targetState.optionsCodex.pages.get("preferences");
+
+            bindSave();
+
+            prefs.createPrefItemCheckbox("Shaders", "If disabled, disables shaders to improve performance.", function(value) {
+                save.modOptions["Shaders"] = value;
+                save.flush();
+            }, save.modOptions["Shaders"]);
+
+            prefs.createPrefItemCheckbox("Low Quality", "If disabled, disables specific items from background to improve performance.", function(value) {
+                save.modOptions["Low Quality"] = value;
+                save.flush();
+            }, save.modOptions["Low Quality"]);
+
+            prefs.createPrefItemCheckbox("Anti-Aliasing", "Enables Anti-Aliasing", function(value) {
+                save.modOptions["Anti-Aliasing"] = value;
+                save.flush();
+            }, save.modOptions["Anti-Aliasing"]);
+        }
+    }
+}
