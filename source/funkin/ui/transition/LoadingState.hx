@@ -118,6 +118,10 @@ class LoadingState extends MusicBeatSubState
       Assets.loadSound(path).onComplete(function(_)
       {
         if (callback != null) callback();
+      }).onError(function(e)
+      {
+        trace('Warning: Failed to load sound ' + path + ', proceeding: ' + e);
+        if (callback != null) callback();
       });
     }
   }
@@ -125,14 +129,19 @@ class LoadingState extends MusicBeatSubState
   function checkLibrary(library:String):Void
   {
     trace(Assets.hasLibrary(library));
+    if (library == null || library == '') return;
     if (Assets.getLibrary(library) == null)
     {
       @:privateAccess
-      if (!LimeAssets.libraryPaths.exists(library)) throw 'Missing library: ' + library;
+      if (!LimeAssets.libraryPaths.exists(library)) return;
 
       var callback = callbacks?.add('library:' + library);
       Assets.loadLibrary(library).onComplete(function(_)
       {
+        if (callback != null) callback();
+      }).onError(function(e)
+      {
+        trace('Warning: Failed to load library ' + library + ', proceeding: ' + e);
         if (callback != null) callback();
       });
     }

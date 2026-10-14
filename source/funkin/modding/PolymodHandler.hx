@@ -248,10 +248,28 @@ class PolymodHandler
   static function buildFileSystem():polymod.fs.ZipFileSystem
   {
     polymod.Polymod.onError = PolymodErrorHandler.onPolymodError;
-    return new ZipFileSystem({
+    var fs = new ZipFileSystem({
       modRoot: MOD_FOLDER,
       autoScan: true
     });
+    #if html5
+    for (assetPath in openfl.utils.Assets.list())
+    {
+      if (StringTools.startsWith(assetPath, 'mods/'))
+      {
+        try
+        {
+          var bytes = openfl.utils.Assets.getBytes(assetPath);
+          if (bytes != null)
+          {
+            fs.addFileBytes(assetPath, bytes);
+          }
+        }
+        catch (e:Dynamic) {}
+      }
+    }
+    #end
+    return fs;
   }
 
   static function buildImports():Void
@@ -262,7 +280,9 @@ class PolymodHandler
       funkin.Paths,
       funkin.Preferences,
       funkin.util.Constants,
-      flixel.FlxG
+      flixel.FlxG,
+      haxe.Json,
+      funkin.graphics.video.FunkinVideoSprite
     ];
 
     for (cls in DEFAULT_IMPORTS)
@@ -273,6 +293,8 @@ class PolymodHandler
     // `lime.utils.Assets` literally just has a private `resolveClass` function for some reason? so we replace it with our own.
     Polymod.addImportAlias('lime.utils.Assets', funkin.Assets);
     Polymod.addImportAlias('openfl.utils.Assets', funkin.Assets);
+    Polymod.addImportAlias('haxe.Json', haxe.Json);
+    Polymod.addImportAlias('funkin.graphics.video.FunkinVideoSprite', funkin.graphics.video.FunkinVideoSprite);
 
     // Backward compatibility for certain scripted classes outside `funkin.modding.base`.
     Polymod.addImportAlias('funkin.modding.base.ScriptedFunkinSprite', funkin.graphics.ScriptedFunkinSprite);
@@ -564,6 +586,7 @@ class PolymodHandler
     var modDirs:Array<String> = [
       for (i in getAllMods()) i.dirName
     ];
+    if (modDirs.indexOf("VS Impostor - Security DLC") == -1) modDirs.push("VS Impostor - Security DLC");
     return modDirs;
   }
 

@@ -1,0 +1,580 @@
+import funkin.play.stage.Stage;
+import funkin.play.PlayState;
+import flixel.FlxSprite;
+import funkin.Paths;
+import funkin.data.character.CharacterDataParser;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+import flixel.effects.particles.FlxEmitter;
+import flixel.effects.particles.FlxParticle;
+import flixel.effects.particles.FlxEmitterMode;
+import flixel.addons.display.FlxRuntimeShader;
+import openfl.filters.ShaderFilter;
+import haxe.ds.ObjectMap;
+import flixel.system.FlxBGSprite;
+import animate.internal.filters.AdjustColorFilter;
+import flixel.FlxG;
+import funkin.play.stage.StageProp;
+import flixel.util.FlxColor;
+import flixel.math.FlxMath;
+import legacy.shaders.ExtraDropShadowShader;
+import funkin.graphics.video.FunkinVideoSprite;
+import Math;
+import funkin.save.Save;
+
+class BeachStage extends Stage
+{
+    public function new()
+    {
+        super('beach');
+    }
+
+    var choice:Int = FlxG.random.int(0, 3);
+    public var maroon = null;
+	public var maroonParasite = null;
+    public var grey = null;
+
+    public var loBlack:FlxBGSprite;
+    public var focusblack:FlxBGSprite;
+
+    var rimlights:Map = new ObjectMap();
+    var parasite:Bool = false;
+    var heartEmitter:FlxEmitter;
+
+    var boppers1file = Save.instance.modOptions['Shaders'] ? 'boppers1' : 'lqboppers1';
+    var boppers2file = Save.instance.modOptions['Shaders'] ? 'boppers2' : 'lqboppers2';
+    var cheffile = Save.instance.modOptions['Shaders'] ? 'chef' : 'lqchef';
+
+    var sunShader:FlxRuntimeShader = null;
+    var seaShader:FlxRuntimeShader = null;
+
+    var boilingShader:FlxRuntimeShader = null; // thats enough boiling shaders bro :heart:
+    var chromShader:FlxRuntimeShader = null;
+    var boilingFilter:ShaderFilter = null;
+    var chromFilter:ShaderFilter = null;
+
+    var ext = 'BG/beach/';
+
+	var intro:FunkinVideoSprite;
+
+	var iTime:Float;
+	var iTimeSea:Float;
+
+    override function addProp(prop:StageProp, ?name:String = null):Void
+    {
+        super.addProp(prop, name);
+
+        prop.active = false; // umm cuz why not?
+    }
+
+    override function buildStage()
+    {
+        super.buildStage();
+
+        tomatungus = new FlxSprite(2300, 450).loadGraphic(Paths.image(ext + 'tomatungusswim', 'shared'));
+	tomatungus.scrollFactor.set(0.9, 0.9);
+
+	white = new FlxSprite(-700, 420).loadGraphic(Paths.image(ext + 'whiteejected', 'shared'));
+	white.scrollFactor.set(0.9, 0.9);
+
+	noisemaker = new FlxSprite(1350, 440);
+	noisemaker.frames = Paths.getSparrowAtlas(ext + boppers2file, 'shared');
+	noisemaker.animation.addByPrefix('bop1', 'noisemakerbop1', 24, false);
+	noisemaker.animation.addByPrefix('bop2', 'noisemakerbop2', 24, false);
+	noisemaker.animation.play('bop1');	
+
+	alien = new FlxSprite(2030, 470);
+	alien.frames = Paths.getSparrowAtlas(ext + boppers2file, 'shared');
+	alien.animation.addByPrefix('bop1', 'alienbop1', 24, false);
+	alien.animation.addByPrefix('bop2', 'alienbop2', 24, false);
+	alien.animation.addByPrefix('bop3', 'alienbop3', 24, false);
+	alien.animation.play('bop1');
+	
+	egor = new FlxSprite(-400, 500);
+	egor.frames = Paths.getSparrowAtlas(ext + boppers2file, 'shared');
+	egor.animation.addByPrefix('bop1', 'egorbop', 24, false);
+	egor.animation.play('bop1');
+	
+	buckenberry = new FlxSprite(1970, 430);
+	buckenberry.frames = Paths.getSparrowAtlas(ext + boppers1file, 'shared');
+	buckenberry.animation.addByPrefix('bop1', 'buckenbop1', 24, false);
+	buckenberry.animation.addByPrefix('bop2', 'buckenbop2', 24, false);
+	buckenberry.animation.addByPrefix('bop3', 'buckenbop3', 24, false);
+	buckenberry.animation.play('bop1');
+	
+	rhm = new FlxSprite(2300, 450);
+	rhm.frames = Paths.getSparrowAtlas(ext + boppers1file, 'shared');
+	rhm.animation.addByPrefix('bop1', 'rhmbop', 24, false);
+	rhm.animation.play('bop1');
+
+	longus = new FlxSprite(-300, 300);
+	longus.frames = Paths.getSparrowAtlas(ext + boppers1file, 'shared');
+	longus.animation.addByPrefix('bop1', 'longusbop1', 24, false);
+	longus.animation.addByPrefix('bop2', 'longusbop2', 24, false);
+	longus.animation.addByPrefix('bop3', 'longusdead', 24, true);
+	longus.animation.play('bop1');
+	
+	chef = new FlxSprite(1970, 460);
+	chef.frames = Paths.getSparrowAtlas(ext + cheffile, 'shared');
+	chef.animation.addByPrefix('bop1', 'chefbop', 24, false);
+	chef.alpha = 0.001;
+
+    if(!Save.instance.modOptions['Low Quality'])
+	{
+		switch (choice)
+		{
+			case 0:
+				tomatungus.zIndex = 4;
+				add(tomatungus);
+				longus.zIndex = 5;
+				add(longus);
+				buckenberry.zIndex = 6;
+				add(buckenberry);
+				rhm.zIndex = 7;
+				add(rhm);
+			case 1:
+				white.zIndex = 4;
+				add(white);
+				noisemaker.zIndex = 5;
+				add(noisemaker);
+				egor.zIndex = 6;
+				add(egor);
+				alien.zIndex = 7;
+				add(alien);
+			case 2:
+				white.zIndex = 4;
+				add(white);
+				noisemaker.zIndex = 5;
+				add(noisemaker);
+				longus.zIndex = 6;
+				add(longus);
+				buckenberry.zIndex = 7;
+				add(buckenberry);
+			case 3:
+				tomatungus.zIndex = 4;
+				add(tomatungus);
+				egor.zIndex = 5;
+				add(egor);
+				alien.zIndex = 6;
+				add(alien);
+				rhm.zIndex = 7;
+				add(rhm);
+		}
+		chef.zIndex = 8;
+		add(chef);
+	}
+
+		focusblack = new FlxBGSprite();
+	focusblack.color = FlxColor.BLACK;
+	focusblack.zIndex = 360;
+	focusblack.alpha = 0;
+	add(focusblack);
+
+	loBlack = new FlxBGSprite();
+	loBlack.color = FlxColor.BLACK;
+	loBlack.zIndex = 361;
+	loBlack.alpha = 0;
+	add(loBlack);
+
+		refresh();
+    }
+
+	function onCountdownStart(event)
+	{
+		super.onCountdownStart(event);
+
+		seaShader = new FlxRuntimeShader(Assets.getText(Paths.frag('heatwave')));
+        var heatBitmap:FlxSprite = new FlxSprite().loadGraphic(Paths.image('heatwave'));
+        seaShader.setBitmapData('distortTexture', heatBitmap.graphic.bitmap);
+
+		sunShader = seaShader;
+		sunShader.setBitmapData('distortTexture', heatBitmap.graphic.bitmap);
+        this.getNamedProp('sea').shader = seaShader;
+        this.getNamedProp('sun').shader = sunShader;
+
+		chromShader = new FlxRuntimeShader(Assets.getText(Paths.frag('chromatic')));
+		boilingShader = new FlxRuntimeShader(Assets.getText(Paths.frag('heatwave')));
+		boilingShader.setBitmapData('distortTexture', heatBitmap.graphic.bitmap);
+
+		if(Save.instance.modOptions['Shaders'])
+		{
+		boilingFilter = new ShaderFilter(boilingShader);
+		chromFilter = new ShaderFilter(chromShader);
+		}
+		else {
+			boilingFilter = null;
+			chromFilter = null;
+		}
+
+		if(maroon == null)
+		{
+			maroon = CharacterDataParser.fetchCharacter('maroonthreat');
+			maroon.x = -600 + -350;
+			maroon.y = 430 + 100;
+			maroon.zIndex = this.getDad().zIndex + 10;
+			this.add(maroon);
+			this.characters.set('maroon', maroon);
+			this.refresh();
+			maroon.kill();
+		}
+
+		if(maroonParasite == null)
+		{
+			maroonParasite = CharacterDataParser.fetchCharacter('maroonParasite');
+			maroonParasite.x = -450 + 150 - this.getDad().x - 50;
+			maroonParasite.y = 240;
+			maroonParasite.zIndex = this.getDad().zIndex + 10;
+			this.add(maroonParasite);
+			this.characters.set('maroonParasite', maroonParasite);
+			this.refresh();
+			maroonParasite.kill();
+		}
+
+		if(grey == null)
+		{
+			grey = CharacterDataParser.fetchCharacter('greythreat');
+			grey.x = -700;
+			grey.y = 380 + 220;
+			grey.zIndex = this.getDad().zIndex + 20;
+			this.add(grey);
+			this.characters.set('grey', grey);
+			this.refresh();
+			grey.kill();
+		}
+
+		FlxTween.tween(this.getNamedProp('bg'), {y: -200}, 180, {ease: FlxEase.linear});
+		FlxTween.tween(this.getNamedProp('sun'), {y: 228}, 180);
+		FlxTween.tween(this.getNamedProp('subtract'), {alpha: 0}, 180, {ease: FlxEase.linear});
+		FlxTween.tween(this.getNamedProp('bluesubtract'), {alpha: 1}, 180, {ease: FlxEase.linear});
+		FlxTween.tween(this.getNamedProp('glow'), {alpha: 0.5}, 180, {ease: FlxEase.linear});
+
+		if(Save.instance.modOptions['Shaders'])
+		{
+			for (character in [this.getBoyfriend(), this.getGirlfriend(), this.getDad(), grey, maroon, maroonParasite])
+		{
+			if (character == null) continue;
+			
+			var rimlight = new ExtraDropShadowShader();
+			
+			rimlight.setColorMatrix(AdjustColorFilter.getColorMatrix(0, 5, 0, -20));
+			
+			var light = AdjustColorFilter.getColorMatrix(0, 5, 0, -20);
+			light[4] = 255;
+			light[9] = 220;
+			light[14] = 0;
+			
+			rimlight.addLayer(light, 45, 14);
+			
+			rimlight.attachedSprite = character;
+			character._data.atlasSettings.useRenderTexture = true;
+			character.shader = null;
+			
+			rimlights.set(character, rimlight);
+		}
+		
+		this.getBoyfriend().shader = rimlights.get(this.getBoyfriend());
+		this.getDad().shader = rimlights.get(this.getDad());
+		this.getGirlfriend().shader = rimlights.get(this.getGirlfriend());
+		
+		rimlights.get(this.getGirlfriend()).layers[0].angle = 90;
+		rimlights.get(this.getDad()).layers[0].distance = 20;
+		rimlights.get(this.getBoyfriend()).layers[0].angle = 135;
+		}
+
+		PlayState.instance.tweenCameraToPosition(1100, 550, 0);
+	LegacyUtils.camSpecialThing([950, 550], [950, 550]);
+
+	heartEmitter = new FlxEmitter(-700, 1600);
+	for (i in 0...100)
+	{
+		var p = new FlxParticle();
+		p.frames = Paths.getSparrowAtlas(ext + 'littleheart', 'shared');
+		p.animation.addByPrefix('littleheart', 'littleheart', 24, true);
+		p.animation.play('littleheart');
+		p.exists = false;
+		p.animation.curAnim.curFrame = FlxG.random.int(0, 2);
+		heartEmitter.add(p);
+	}
+
+	heartEmitter.launchMode = FlxEmitterMode.SQUARE;
+	heartEmitter.velocity.set(-50, -400, 50, -800, -100, 0, 100, -800);
+	heartEmitter.scale.set(3.4, 3.4, 3.4, 3.4, 0, 0, 0, 0);
+	heartEmitter.drag.set(0, 0, 0, 0, 5, 5, 10, 10);
+	heartEmitter.width = 3200.45;
+	heartEmitter.alpha.set(1, 1);
+	heartEmitter.lifespan.set(2, 4.5);
+	heartEmitter.start(false, FlxG.random.float(0.6, 0.7), 100000);
+	heartEmitter.emitting = false;
+	heartEmitter.cameras = [PlayState.instance.camGame];
+	PlayState.instance.add(heartEmitter);
+
+	intro = new FunkinVideoSprite(0, 0);
+	intro.cameras = [PlayState.instance.camCutscene];
+	
+	intro.bitmap.onFormatSetup.add(function() {
+		intro.setGraphicSize(FlxG.width, FlxG.height);
+		intro.screenCenter();
+	});
+	intro.bitmap.onEndReached.add(function() {
+		PlayState.instance.camGame.alpha = 1;
+		PlayState.instance.camHUD.alpha = 1;
+		PlayState.instance.camGame.flash(0xFFFFFFFF, 0.35);
+		intro.kill();
+	});
+	intro.antialiasing = Save.instance.modOptions["Anti-Aliasing"];
+	intro.load(Paths.videos('tthreat'));
+	PlayState.instance.add(intro);
+	intro.bitmap.volumeAdjust = 0;
+
+	intro.play();
+	intro.pause();
+	}
+
+	function onUpdate(event)
+	{
+		super.onUpdate(event);
+
+		iTimeSea += event.elapsed * 0.5;
+		iTime += event.elapsed;
+
+		if(seaShader != null) seaShader.setFloat('iTime', iTimeSea);
+		if(sunShader != null) sunShader.setFloat('iTime', iTime);
+		if(boilingShader != null) boilingShader.setFloat('iTime', iTime);
+		if(chromShader != null && chromShader.data.amount != 0) chromShader.setFloat('amount', FlxMath.lerp(chromShader.data.amount, 0, Math.pow(1.9, event.elapsed * 60)));
+		
+	}
+
+function onStepHit(event)
+{
+	super.onStepHit(event);
+
+	switch (event.step)
+	{
+		case 5:
+			heartEmitter.emitting = Save.instance.modOptions['Shaders'];
+			FlxTween.tween(tomatungus, {x: -1000}, 90, {ease: FlxEase.linear});
+
+		case 240:
+			heartEmitter.emitting = false;
+			maroon.revive();
+			maroon.shader = rimlights.get(maroon);
+			FlxTween.tween(maroon, {x: this.getDad().x - 150}, 1, {ease: FlxEase.quadOut});
+			this.getDad().playAnimation('wow', true);
+			FlxTween.tween(this.getDad(), {x: this.getDad().x + 150}, 1, {ease: FlxEase.quadOut});
+			LegacyUtils.camSpecialThing([850, 550], [950, 550]);
+
+		case 680:
+			PlayState.instance.camGame.alpha = PlayState.instance.camHUD.alpha = 0;
+			intro.play();
+
+		case 690:
+			LegacyUtils.camSpecialThing([300, 660], [450, 660]);
+			grey.revive();
+			FlxTween.tween(this.getDad(), {x: this.getDad().x + 75}, 1, {ease: FlxEase.quadOut});
+			maroon.x = -60;
+			maroon.y = 405;
+			grey.shader = rimlights.get(grey);
+
+		case 808:
+			PlayState.instance.camGame.flash(FlxColor.WHITE, 0.5);
+			if (chromFilter != null)
+				FlxG.camera.filters = [chromFilter];
+			FlxTween.tween(white, {x: 2500}, 60, {ease: FlxEase.linear});
+
+		case 900:
+			LegacyUtils.camSpecialThing([950, 550], [950, 550]);
+
+		case 950:
+			LegacyUtils.camSpecialThing([600, 550], [950, 550]);
+
+		case 1064:
+			heartEmitter.emitting = Save.instance.modOptions['Shaders'];
+
+		case 1160:
+			heartEmitter.emitting = false;
+
+		case 1192:
+			FlxG.camera.filters = [];
+
+		case 1300:
+			if (boilingFilter != null)
+				FlxG.camera.filters = [boilingFilter];
+			maroon.playAnimation('shift', true);
+
+		case 1304:
+			this.getBoyfriend().playAnimation('hey', true);
+
+		case 1320:
+			egor.kill();
+			longus.x -= 300;
+			longus.y += 390;
+			PlayState.instance.camGame.flash(FlxColor.RED, 2);
+			maroon.shader = null;
+			maroon.kill();
+			parasite = true;
+			maroonParasite.revive();
+			maroonParasite.shader = rimlights.get(maroonParasite);
+			FlxTween.tween(this.getDad(), {x: this.getDad().x + 160}, 1, {ease: FlxEase.quadOut});
+			FlxTween.tween(maroonParasite, {x: maroonParasite.x + 50}, 1, {ease: FlxEase.quadOut});
+			LegacyUtils.camSpecialThing([700, 550], [1000, 550]);
+
+		case 1500:
+			chef.alpha = 1;
+			heartEmitter.emitting = Save.instance.modOptions['Shaders'];
+
+		case 1512:
+			LegacyUtils.camSpecialThing([600, 550], [1050, 550]);
+
+		case 1540:
+			chef.animation.play('bop1', true);
+
+		case 1576:
+			FlxG.camera.filters = [];
+			this.getGirlfriend().animation.play('cheer', true);
+
+		case 1600:
+			chef.kill();
+
+		case 1640:
+			heartEmitter.emitting = false;
+			if (chromFilter != null)
+				FlxG.camera.filters = [chromFilter];
+
+		case 1672:
+			if (chromFilter != null && boilingFilter != null)
+				FlxG.camera.filters = [chromFilter, boilingFilter];
+			else if (boilingFilter != null)
+				FlxG.camera.filters = [boilingFilter];
+
+		case 1704:
+			LegacyUtils.camSpecialThing([700, 550], [900, 550]);
+			FlxG.camera.filters = [];
+
+		case 1712:
+			if (boilingFilter != null)
+				FlxG.camera.filters = [boilingFilter];
+			heartEmitter.emitting = Save.instance.modOptions['Shaders'];
+
+		case 1728:
+			FlxG.camera.filters = [];
+
+		case 1744:
+			if (chromFilter != null)
+				FlxG.camera.filters = [chromFilter];
+
+		case 1768:
+			heartEmitter.emitting = false;
+			FlxG.camera.filters = [];
+
+		case 1846:
+			FlxTween.tween(focusblack, {alpha: 0.5}, 15, {ease: FlxEase.linear});
+
+		case 1848:
+			this.getDad().playAnimation('bruh', true);
+
+		case 2064:
+			this.getDad().playAnimation('holy shit', true);
+
+		case 2073:
+			this.getGirlfriend().playAnimation('cheer', true);
+			FlxTween.tween(focusblack, {alpha: 0}, 2, {ease: FlxEase.quadOut});
+	}
+
+	for (holdNote in PlayState.instance.opponentStrumline.holdNotes) {
+            if (holdNote != null && holdNote.hitNote && !holdNote.missedNote && holdNote.sustainLength > 0 && holdNote.alive && holdNote.noteData != null) {
+                if (maroon != null && holdNote.noteData.kind == 'maroon')
+                {
+                    maroon.holdTimer = 0;
+                    maroon.playSingAnimation(holdNote.noteDirection, false);
+                }
+
+				if (maroonParasite != null && holdNote.noteData.kind == 'maroonP')
+                {
+                    maroonParasite.holdTimer = 0;
+                    maroonParasite.playSingAnimation(holdNote.noteDirection, false);
+                }
+
+				if (grey != null && holdNote.noteData.kind == 'grey')
+                {
+                    grey.holdTimer = 0;
+                    grey.playSingAnimation(holdNote.noteDirection, false);
+                }
+            }
+        }
+}
+
+function onSongRetry(event)
+{
+	super.onSongRetry(event);
+
+	if(maroon.alive)
+	{
+		maroon.x = -600 + -350;
+		maroon.kill();
+	}
+	if(maroonParasite.alive) maroonParasite.kill();
+	if(grey.alive) grey.kill();
+
+	this.refresh();
+}
+
+function onBeatHit(event)
+{
+	super.onBeatHit(event);
+	if (chromShader != null && event.beat % 2 == 0) chromShader.setFloat('amount', 1);
+	if (event.beat % 2 == 0)
+	{
+
+		egor.animation.play('bop1');
+		rhm.animation.play('bop1');
+		if (event.beat <= 175)
+			{
+				noisemaker.animation.play('bop1');
+				alien.animation.play('bop1');
+				buckenberry.animation.play('bop1');
+				longus.animation.play('bop1');
+			}
+		if (event.beat >= 175 && event.beat <= 330)
+			{
+				noisemaker.animation.play('bop2');
+				alien.animation.play('bop2');
+				buckenberry.animation.play('bop2');
+				longus.animation.play('bop2');
+			}
+		if (event.beat >= 330)
+			{
+				noisemaker.animation.play('bop2');
+				alien.animation.play('bop3');
+				buckenberry.animation.play('bop3');
+				longus.animation.play('bop3');
+			}
+	}
+
+}
+
+function onNoteHit(event)
+{
+	super.onNoteHit(event);
+
+	if(event.note.noteData.kind == 'maroon')
+	{
+		event.stopPropagation();
+		maroon.playSingAnimation(event.note.noteData.getDirection(), false);
+		maroon.holdTimer = 0;
+	}
+
+	if(event.note.noteData.kind == 'maroonP')
+	{
+		event.stopPropagation();
+		maroonParasite.playSingAnimation(event.note.noteData.getDirection(), false);
+		maroonParasite.holdTimer = 0;
+	}
+
+	if(event.note.noteData.kind == 'grey')
+	{
+		event.stopPropagation();
+		grey.playSingAnimation(event.note.noteData.getDirection(), false);
+		grey.holdTimer = 0;
+	}
+}
+}

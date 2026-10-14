@@ -331,7 +331,7 @@ class Project extends HXProject
    * Misses are still counted when the player has notes to hit.
    */
   static final FEATURE_GHOST_TAPPING:FeatureFlag = "FEATURE_GHOST_TAPPING";
-
+    
   /**
    * `-DFEATURE_HAPTICS`
    * If this flag is enabled, the game provide haptic feedback vibrations.
@@ -859,6 +859,7 @@ class Project extends HXProject
     FEATURE_OPEN_URL.apply(this, true);
     FEATURE_PARTIAL_SOUNDS.apply(this, true);
     FEATURE_POLYMOD_MODS.apply(this, true);
+    FEATURE_GHOST_TAPPING.apply(this, true);
 
     // Video playback should be enabled on desktop, web, and mobile.
     FEATURE_VIDEO_PLAYBACK.apply(this, true);
@@ -1406,6 +1407,7 @@ class Project extends HXProject
     var shouldPreloadDefault = true;
     addAssetLibrary("default", shouldEmbed, shouldPreloadDefault);
     addAssetPath("assets/preload", "assets", "default", ["*"], exclude, shouldEmbed, "assets");
+    addAssetPath("mods", "mods", "default", ["*"], ["*.mp4"], shouldEmbed, "mods");
 
     if (!HARDCODED_CREDITS.isEnabled(this))
     {

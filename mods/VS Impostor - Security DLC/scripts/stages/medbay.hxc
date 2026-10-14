@@ -1,0 +1,337 @@
+import funkin.play.stage.Stage;
+import funkin.play.stage.StageProp;
+import funkin.play.stage.Bopper;
+import funkin.play.PlayState;
+import flixel.addons.display.FlxRuntimeShader;
+import legacy.shaders.ExtraDropShadowShader;
+import flixel.FlxG;
+import funkin.Paths;
+import Math;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+import flixel.util.FlxColor;
+import Std;
+import funkin.play.PlayStatePlaylist;
+import legacy.objects.LegacyDialogueBox;
+import funkin.play.cutscene.VideoCutscene;
+
+class MedbayStage extends Stage
+{
+    public function new()
+    {
+        super('medbay');
+        hasPlayedCutscene = false;
+        hasPlayedDialogue = false;
+    }
+
+    var rimlight:FlxRuntimeShader = null;
+
+    public var hudDarkShader:ExtraDropShadowShader;
+    public var darkShader:ExtraDropShadowShader;
+    var ouch:Bool = false;
+    var hesDying:Bool = false;
+    var dieMiss:Bool = false;
+    var isDark:Bool = false;
+    var noshader:Bool = false;
+    var propList = [];
+
+    var hasPlayedCutscene:Bool = false;
+    var hasPlayedDialogue:Bool = false;
+    var videoFinished:Bool = false;
+
+    override public function addProp(prop:StageProp, ?name:String = null):Void
+    {
+        super.addProp(prop, name);
+
+        propList.push(prop);
+    }
+
+    override public function addBopper(bopper:Bopper, ?name:String = null):Void
+    {
+        super.addBopper(bopper, name);
+
+        propList.push(bopper);
+    }
+
+    override function buildStage()
+    {
+        super.buildStage();
+
+        this.getNamedProp('loBlack').scale.set(FlxG.width, FlxG.height);
+        this.getNamedProp('loBlack').alpha = 0.001;
+        this.getNamedProp('loBlack').screenCenter();
+
+        this.getNamedProp('blooodfuckkk').scale.set(FlxG.width * 4, FlxG.height + 700);
+        this.getNamedProp('blooodfuckkk').alpha = 0.001;
+        this.getNamedProp('blooodfuckkk').screenCenter();
+
+        this.getNamedProp('loBlack2').scale.set(FlxG.width * 4, FlxG.height + 700);
+        this.getNamedProp('loBlack2').alpha = 0.001;
+        this.getNamedProp('loBlack2').screenCenter();
+    }
+
+    function onSongLoaded(event)
+    {
+        super.onSongLoaded(event);
+
+        if(!PlayStatePlaylist.isStoryMode)
+        {
+            hasPlayedCutscene = true;
+            hasPlayedDialogue = true;
+            videoFinished = true;
+        }
+    }
+
+    function onSongRetry(event)
+    {
+        hasPlayedCutscene = true;
+        hasPlayedDialogue = true;
+        videoFinished = true;
+    }
+
+    function onCountdownStart(event)
+    {
+        super.onCountdownStart(event);
+
+        rimlight = new FlxRuntimeShader(Assets.getText(Paths.frag('rimlight1')));
+        rimlight.setFloatArray('dropColor', [255, 0, 0]);
+        rimlight.setBool('useMask', false);
+        rimlight.setFloat('AA_STAGES', 100);
+        rimlight.setFloat('thr', 0.01); 
+        rimlight.setFloat('hue', -10);
+        rimlight.setFloat('saturation', -20);
+        rimlight.setFloat('brightness', -10);  
+        rimlight.setFloat('str', 1);
+        rimlight.setFloat('dist', 14);
+        rimlight.setFloat('ang', 150 * Math.PI / 180);
+
+        this.getDad().shader = rimlight;
+
+        darkShader = new ExtraDropShadowShader();
+        darkShader.antialiasStages = 4;
+        darkShader.threshold = .03;
+        darkShader.setHollowColorMatrix([
+            0, 0, 0, 0, 255,
+            0, 0, 0, 0, 255,
+            0, 0, 0, 0, 255,
+            0, 0, 0, 1, 0
+        ]);
+        darkShader.setColorMatrix([
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 1, 0
+        ]);
+
+        hudDarkShader = new ExtraDropShadowShader().copyFrom(darkShader);
+        hudDarkShader.threshold = 0.12;
+        hudDarkShader.setHollowColorMatrix([
+            0, 0, 0, 0, 224,
+            0, 0, 0, 0, 224,
+            0, 0, 0, 0, 224,
+            0, 0, 0, 1, 0
+        ]);
+
+        darkShader.addLayer([
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 1, 0
+        ], -70, 22, 0);
+        darkShader.addLayer([
+            0, 0, 0, 0, 255,
+            0, 0, 0, 0, 255,
+            0, 0, 0, 0, 255,
+            0, 0, 0, 1, 0
+        ], 140, 10, 0);
+        darkShader.addLayer([
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 1, 0
+        ], -32, 12, 0);
+	
+        darkShader.attachedSprite = this.getBoyfriend();
+        this.getBoyfriend()._data.atlasSettings.useRenderTexture = true;
+        this.getBoyfriend().shader = null;
+
+        LegacyUtils.camSpecialThing([640, 450], [810, 450]);
+        PlayState.instance.tweenCameraToPosition(800, 450, 0);
+
+        if(!hasPlayedCutscene)
+        {
+            event.cancel();
+            hasPlayedCutscene = true;
+            VideoCutscene.play(Paths.videos('dontlied'));
+        }
+
+        VideoCutscene.onVideoEnded.add(function()
+        {
+            videoFinished = true;
+        });
+
+        if(hasPlayedCutscene && videoFinished && !hasPlayedDialogue)
+        {
+            event.cancel();
+            var dialogue = new LegacyDialogueBox('dont-lied');
+			hasPlayedDialogue = true;
+            PlayState.instance.add(dialogue);
+        }
+    }
+
+    function onUpdate(event)
+    {
+        super.onUpdate(event);
+
+        var uv = this.getDad().frame.uv;
+        rimlight.setFloatArray('uFrameBounds', [uv.x, uv.y, uv.width, uv.height]);
+        rimlight.setFloat('angOffset', this.getDad().frame.angle * Math.PI / 180);
+    }
+
+function onStepHit(event)
+{
+    super.onStepHit(event);
+
+	switch (event.step)
+	{
+		case 18:
+	    	PlayState.instance.tweenCameraZoom(0.75, 1, true, FlxEase.quadInOut);
+		case 80:
+	    	PlayState.instance.tweenCameraZoom(0.78, 1, true, FlxEase.quadInOut);
+		case 132:
+	    	PlayState.instance.tweenCameraZoom(0.75, 0.5, true, FlxEase.quadInOut);
+		case 140:
+	    	PlayState.instance.tweenCameraZoom(0.78, 0.5, true, FlxEase.quadOut);
+		case 144:
+	    	PlayState.instance.tweenCameraZoom(0.79, 0.5, true, FlxEase.quadOut);
+		case 208:
+	    	PlayState.instance.tweenCameraZoom(0.8, 0.5, true, FlxEase.quadOut);
+		case 224:
+	    	PlayState.instance.tweenCameraZoom(0.79, 0.5, true, FlxEase.quadOut);
+		case 272:
+	    	PlayState.instance.tweenCameraZoom(0.7, 2, true, FlxEase.quadOut);
+		case 408:
+	    	PlayState.instance.tweenCameraZoom(0.85, 1, true, FlxEase.quadInOut);
+		case 416:
+	    	PlayState.instance.tweenCameraZoom(0.7, 2, true, FlxEase.quadOut);
+		case 612:
+	    	PlayState.instance.tweenCameraZoom(0.75, 0.2, true, FlxEase.quadOut);
+        case 654:
+	    	PlayState.instance.tweenCameraZoom(0.68, 0.5, true, FlxEase.quadOut);
+        case 662:
+	    	PlayState.instance.tweenCameraZoom(0.75, 1, true, FlxEase.quadOut);
+		case 672:
+	    	PlayState.instance.tweenCameraZoom(0.78, 0.2, true, FlxEase.quadOut);
+        case 676:
+	    	PlayState.instance.tweenCameraZoom(0.8, 0.2, true, FlxEase.quadOut);
+        case 678:
+	    	PlayState.instance.tweenCameraZoom(0.73, 2, true, FlxEase.quadInOut);
+        case 736:
+	    	PlayState.instance.tweenCameraZoom(0.70, 1, true, FlxEase.quadOut);
+        case 800:
+	    	PlayState.instance.tweenCameraZoom(0.75, 1, true, FlxEase.quadOut);
+        case 928:
+	    	PlayState.instance.tweenCameraZoom(0.7, 1, true, FlxEase.quadOut);
+        case 1056:
+	    	PlayState.instance.tweenCameraZoom(0.73, 0.5, true, FlxEase.quadOut);
+        case 1180:
+	    	PlayState.instance.tweenCameraZoom(0.70, 0.5, true, FlxEase.quadOut);
+		case 1184:
+	    	lightsOut();
+	    	LegacyUtils.camSpecialThing([640, 450], [980, 480]);
+            PlayState.instance.tweenCameraZoom(0.9, 20, true, FlxEase.quadInOut);
+			this.getDad().idleSuffix = '-alt';
+
+		case 1232:
+	    	this.getDad().x = 690;
+
+		case 1376:
+	    	lightsOn();
+			LegacyUtils.camSpecialThing([640, 450], [810, 450]);
+
+        case 1394:
+			hesDying = true;
+            PlayState.instance.tweenCameraZoom(0.85, 1, true, FlxEase.quadInOut);
+			this.getDad().playAnimation('stab', true);
+
+		case 1396:
+	    	this.getNamedProp('blooodfuckkk').alpha = 0.8;
+            LegacyUtils.camSpecialThing([640, 450], [810, 470]);
+	    	FlxTween.tween(this.getNamedProp('blooodfuckkk'), {alpha: 0.2}, 2, {ease: FlxEase.quadInOut});
+			this.getGirlfriend().playAnimation('sad', true);
+	    	FlxTween.tween(this.getDad(), {x: this.getDad().x - 75}, 6, {ease: FlxEase.quadInOut});
+
+        	ouch = true;
+
+		case 1408:
+			ouch = false;
+			for (anim in PlayState.instance.currentStage.getBoyfriend().animation.getAnimationList()) 
+                anim.frameRate = Std.int(anim.frameRate * .75);
+
+            PlayState.instance.tweenCameraZoom(0.9, 20, true);
+		    FlxTween.tween(this.getNamedProp('loBlack2'), {alpha: 1}, 20);
+
+			this.getDad().idleSuffix = '-fart';
+	}
+    }
+
+    function onBeatHit(event)
+    {
+        super.onBeatHit(event);
+
+        if(event.beat >= 1184)
+        {
+            this.getNamedProp('light').playAnimation('lightsoff', true);
+        }
+    }
+
+    function lightsOut()
+    {
+        isDark = true;
+
+        PlayState.instance.camGame.flash(FlxColor.WHITE, 0.5);
+        this.getGirlfriend().alpha = 0.001;
+        PlayState.instance.iconP1.shader = hudDarkShader;
+        for(i in propList) i.alpha = 0.001;
+        this.getDad().alpha = 0.001;
+        this.getDad().shader = null;
+        this.getNamedProp('loBlack').alpha = 1;
+        PlayState.instance.iconP2.alpha = 0.001;
+        this.getBoyfriend().shader = darkShader;
+    }
+
+    function lightsOn()
+    {
+        isDark = false;
+        for(i in propList) i.alpha = 1;
+        this.getNamedProp('loBlack').alpha = 0.001;
+        this.getNamedProp('blooodfuckkk').alpha = 0.001;
+        this.getNamedProp('loBlack2').alpha = 0.001;
+        PlayState.instance.camGame.flash(FlxColor.BLACK, 0.35);
+        PlayState.instance.iconP1.shader = null;
+        this.getDad().alpha = 1;
+        this.getGirlfriend().alpha = 1;
+        this.getBoyfriend().shader = null;
+    }
+
+    function onNoteHit(event)
+    {
+        super.onNoteHit(event);
+
+        if(!event.note.noteData.getMustHitNote())
+        {
+            if(PlayState.instance.health > 0.2) PlayState.instance.health -= 0.02;
+        }
+
+        if(event.note.noteData.getMustHitNote())
+        {
+            if (hesDying)
+            {
+                if (FlxG.random.bool(30)) FlxTween.shake(this.getBoyfriend(), .005, .05, 0x01);
+                if (FlxG.random.bool(30)) FlxTween.shake(this.getBoyfriend(), .003, .05, 0x10);
+
+                if (PlayState.instance.health > 0.2) PlayState.instance.health -= 0.035;
+            }
+        }
+    }
+}
