@@ -1,0 +1,165 @@
+{
+ "version": "1.0.2",
+ "name": "Security",
+ "props": [
+  {
+   "assetPath": "BG/security/wall",
+   "atlasSettings": null,
+   "name": "bg",
+   "position": [-550, -270],
+   "scale": 1,
+   "startingAnimation": ""
+  },
+  {
+   "assetPath": "BG/security/cabinets",
+   "atlasSettings": null,
+   "name": "cabinets",
+   "position": [-552, -140],
+   "scale": 1,
+   "scroll": [0.95, 1],
+   "startingAnimation": "",
+   "zIndex": 1
+  },
+  {
+   "animations": [
+    {
+     "animType": null,
+     "assetPath": null,
+     "atlasSettings": null,
+     "name": "idle",
+     "prefix": "bop",
+     "renderType": null
+    }
+   ],
+   "assetPath": "BG/security/shit",
+   "atlasSettings": null,
+   "name": "shit",
+   "position": [350, 480],
+   "scale": 1,
+   "scroll": [0.93, 1],
+   "startingAnimation": "",
+   "zIndex": 2
+  },
+  {
+   "animations": [
+    {
+     "animType": null,
+     "assetPath": null,
+     "atlasSettings": null,
+     "name": "idle",
+     "prefix": "bop",
+     "renderType": null
+    }
+   ],
+   "assetPath": "BG/security/tawny",
+   "atlasSettings": null,
+   "name": "tawny",
+   "position": [-130, 330],
+   "scale": 1,
+   "scroll": [0.93, 1],
+   "startingAnimation": "",
+   "zIndex": 3
+  },
+  {
+   "alpha": 0,
+   "assetPath": "BG/security/deadtawny",
+   "atlasSettings": null,
+   "name": "deadtawny",
+   "position": [-130, 400],
+   "scale": 1,
+   "scroll": [0.93, 1],
+   "startingAnimation": "",
+   "zIndex": 4
+  },
+  {
+   "assetPath": "BG/security/props",
+   "atlasSettings": null,
+   "name": "props",
+   "position": [180, 20],
+   "scale": 1,
+   "scroll": [0.98, 1],
+   "startingAnimation": "",
+   "zIndex": 5
+  },
+  {
+   "assetPath": "BG/security/table",
+   "atlasSettings": null,
+   "name": "table",
+   "position": [35, 210],
+   "scale": 1,
+   "scroll": [0.97, 1],
+   "startingAnimation": "",
+   "zIndex": 6
+  },
+  {
+   "alpha": 0.4,
+   "assetPath": "BG/security/substract",
+   "atlasSettings": null,
+   "blend": "subtract",
+   "name": "substract",
+   "position": [-550, -270],
+   "scale": 1,
+   "scroll": [0, 0],
+   "startingAnimation": "",
+   "zIndex": 8
+  },
+  {
+   "animations": [
+    {
+     "animType": null,
+     "assetPath": null,
+     "atlasSettings": null,
+     "name": "idle",
+     "prefix": "idle",
+     "renderType": null
+    }
+   ],
+   "assetPath": "BG/security/minigrey",
+   "atlasSettings": null,
+   "name": "graypet",
+   "position": [-80, 750],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 250
+  },
+  {
+   "assetPath": "BG/security/vignette",
+   "atlasSettings": null,
+   "name": "vignette",
+   "position": [-550, -270],
+   "scale": 1,
+   "scroll": [0, 0],
+   "startingAnimation": "",
+   "zIndex": 350
+  },
+  {
+   "assetPath": "BG/security/light",
+   "atlasSettings": null,
+   "blend": "add",
+   "name": "light",
+   "position": [-250, -270],
+   "scale": 1,
+   "scroll": [1.2, 1.2],
+   "startingAnimation": "",
+   "zIndex": 351
+  }
+ ],
+ "characters": {
+  "bf": {
+   "cameraOffsets": [-100, -100],
+   "position": [1291, 870],
+   "zIndex": 300
+  },
+  "dad": {
+   "cameraOffsets": [150, -100],
+   "position": [-28, 1185],
+   "zIndex": 200
+  },
+  "gf": {
+   "cameraOffsets": [0, 0],
+   "position": [921.5, 746],
+   "zIndex": 100
+  }
+ },
+ "cameraZoom": 0.7
+}

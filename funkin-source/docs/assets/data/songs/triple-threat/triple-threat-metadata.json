@@ -1,0 +1,47 @@
+{
+ "version": "2.2.4",
+ "songName": "Triple Threat",
+ "artist": "seotoo",
+ "charter": "Cryfur",
+ "offsets": { },
+ "playData": {
+  "difficulties": [
+   "easy",
+   "normal",
+   "hard"
+  ],
+  "characters": {
+   "player": "bfweird",
+   "girlfriend": "gfweird",
+   "opponent": "pinkthreat",
+   "opponentVocals": [
+    "pinkthreat"
+   ],
+   "playerVocals": []
+  },
+  "stage": "beach",
+  "noteStyle": "impostor",
+  "ratings": {
+   "normal": 0,
+   "hard": 0
+  },
+  "album": "volume1",
+  "stickerPack": "default",
+  "previewEnd": 0
+ },
+ "generatedBy": "Friday Night Funkin' - v0.8.5",
+ "timeChanges": [
+  {
+   "t": 0,
+   "b": 0,
+   "bpm": 166,
+   "bt": [4, 4, 4, 4]
+  },
+  {
+   "t": 62171.6311,
+   "b": 172.0082,
+   "bpm": 198,
+   "bt": [4, 4, 4, 4]
+  }
+ ]
+}

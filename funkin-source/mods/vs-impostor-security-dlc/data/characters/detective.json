@@ -1,0 +1,136 @@
+{
+	"renderType": "animateatlas",
+	"version": "1.0.1",
+	"offsets": [
+		0,
+		0
+	],
+	"danceEvery": 2,
+	"scale": 1,
+	"name": "detective",
+	"cameraOffsets": [
+		211,
+		-46
+	],
+	"flipX": false,
+	"isPixel": false,
+	"singTime": 6,
+	"startingAnimation": "idle",
+	"healthIcon": {
+		"id": "detective",
+		"isPixel": false
+	},
+	"assetPath": "shared:characters/dlc/detective",
+	"animations": [
+		{
+			"frameIndices": [],
+			"prefix": "idle",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "idle",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "shock",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "shock",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "down",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "singDOWN",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "up",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "singUP",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "left",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "singLEFT",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "right",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "singRIGHT",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "dalt",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "singDOWN-alt",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "ualt",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "singUP-alt",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "lalt",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "singLEFT-alt",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "ralt",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "singRIGHT-alt",
+			"looped": false
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{
+    "version": "1.0.0",
+    "name": "Somewhere Else",
+    "titleAsset": "storymenu/titles/extra",
+  "capsule": {
+    "name": "Somewhere Else"
+  },
+    "props": [],
+    "background": "#FFFFFF",
+    "songs": [
+        "49", "don't-lied", "suspect"
+    ]
+}

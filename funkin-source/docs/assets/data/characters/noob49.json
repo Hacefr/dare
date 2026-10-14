@@ -1,0 +1,103 @@
+{
+	"renderType": "animateatlas",
+	"version": "1.0.1",
+	"offsets": [
+		0,
+		0
+	],
+	"danceEvery": 2,
+	"scale": 1,
+	"name": "noob49",
+	"cameraOffsets": [
+		458,
+		174
+	],
+	"flipX": true,
+	"isPixel": false,
+	"singTime": 6,
+	"startingAnimation": "idle",
+	"healthIcon": {
+		"id": "noob49",
+		"isPixel": false
+	},
+	"assetPath": "shared:characters/dlc/noob49",
+	"animations": [
+		{
+			"frameIndices": [],
+			"prefix": "idle",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "idle",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "hey",
+			"offsets": [
+				4,
+				0
+			],
+			"frameRate": 24,
+			"name": "hey",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "down",
+			"offsets": [
+				3,
+				0
+			],
+			"frameRate": 24,
+			"name": "singDOWN",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "up",
+			"offsets": [
+				0,
+				0
+			],
+			"frameRate": 24,
+			"name": "singUP",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "right",
+			"offsets": [
+				2,
+				0
+			],
+			"frameRate": 24,
+			"name": "singLEFT",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "left",
+			"offsets": [
+				6,
+				-1
+			],
+			"frameRate": 24,
+			"name": "singRIGHT",
+			"looped": false
+		},
+		{
+			"frameIndices": [],
+			"prefix": "fucked",
+			"offsets": [
+				1,
+				0
+			],
+			"frameRate": 24,
+			"name": "fucked",
+			"looped": false
+		}
+	]
+}

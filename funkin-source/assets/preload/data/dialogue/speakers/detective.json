@@ -1,0 +1,29 @@
+{
+    "name": "Detective",
+    "side": 0,
+    "asset": "detective",
+    "boxColor": [52, 47, 67],
+    "boxShadeColor": [21, 20, 26], 
+    "icon": "detective",
+    "sound": "detective",
+    "animations": [
+        {
+        "anim": "normal",
+        "name": "detective normal",
+        "loop": false,
+        "offsets": [0,15]
+        },
+        {
+        "anim": "what",
+        "name": "detective what",
+        "loop": false,
+        "offsets": [0,15]
+        },
+        {
+        "anim": "think",
+        "name": "detective think",
+        "loop": false,
+        "offsets": [0,15]
+        }
+    ]
+}

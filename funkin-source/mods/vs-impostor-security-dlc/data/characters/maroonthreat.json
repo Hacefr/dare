@@ -1,0 +1,194 @@
+{
+	"renderType": "animateatlas",
+	"version": "1.0.1",
+	"offsets": [
+		0,
+		0
+	],
+	"danceEvery": 2,
+	"applyStageMatrix": false,
+	"scale": 0.9,
+	"name": "maroonthreat",
+	"cameraOffsets": [
+		0,
+		0
+	],
+	"flipX": false,
+	"isPixel": false,
+	"singTime": 6,
+	"startingAnimation": "idle",
+	"healthIcon": {
+		"offsets": [
+			0,
+			0
+		],
+		"shouldBop": true,
+		"isPixel": false,
+		"scale": 1,
+		"flipX": false,
+		"id": "maroon"
+	},
+	"assetPath": "shared:characters/dlc/maroonthreat",
+	"atlasSettings": {
+		"applyStageMatrix": false,
+		"useRenderTexture": true,
+		"filterQuality": 1,
+		"cacheOnLoad": false,
+		"swfMode": true
+	},
+	"animations": [
+		{
+			"offsets": [
+				166,
+				-137
+			],
+			"frameIndices": [],
+			"prefix": "right",
+			"flipX": false,
+			"animType": "symbol",
+			"looped": false,
+			"name": "singRIGHT",
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"offsets": [
+				251,
+				-157
+			],
+			"frameIndices": [],
+			"prefix": "down",
+			"flipX": false,
+			"animType": "symbol",
+			"looped": false,
+			"name": "singDOWN",
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"offsets": [
+				258,
+				-231
+			],
+			"frameIndices": [],
+			"prefix": "left",
+			"flipX": false,
+			"animType": "symbol",
+			"looped": false,
+			"name": "singLEFT",
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"offsets": [
+				378,
+				-135
+			],
+			"frameIndices": [],
+			"prefix": "up",
+			"flipX": false,
+			"animType": "symbol",
+			"looped": false,
+			"name": "singUP",
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"offsets": [
+				249,
+				-190
+			],
+			"frameIndices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			],
+			"prefix": "idle",
+			"flipX": false,
+			"animType": "symbol",
+			"looped": false,
+			"name": "idle",
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"offsets": [
+				235,
+				-149
+			],
+			"frameIndices": [],
+			"prefix": "hey",
+			"flipX": false,
+			"animType": "symbol",
+			"looped": false,
+			"name": "hey",
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"offsets": [
+				249,
+				-190
+			],
+			"frameIndices": [
+				14,
+				15,
+				16,
+				17,
+				18
+			],
+			"prefix": "idle-loop",
+			"flipX": false,
+			"animType": "symbol",
+			"looped": true,
+			"name": "idle",
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"offsets": [
+				249,
+				-190
+			],
+			"frameIndices": [
+				14,
+				15,
+				16,
+				17,
+				18
+			],
+			"prefix": "idle",
+			"flipX": false,
+			"animType": "symbol",
+			"looped": true,
+			"name": "idle-hold",
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"offsets": [
+				247,
+				-122
+			],
+			"frameIndices": [],
+			"prefix": "shift",
+			"flipX": false,
+			"animType": "symbol",
+			"looped": false,
+			"name": "shift",
+			"flipY": false,
+			"frameRate": 24
+		}
+	]
+}

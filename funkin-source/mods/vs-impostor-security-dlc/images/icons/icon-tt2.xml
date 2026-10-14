@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="icon-tt2.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="idle0000" x="0" y="0" width="173" height="171" frameX="-1" frameY="1" frameWidth="177" frameHeight="170"/>
+	<SubTexture name="losing0000" x="173" y="0" width="176" height="159" frameX="-3" frameY="-11" frameWidth="177" frameHeight="170"/>
+</TextureAtlas>
