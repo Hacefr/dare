@@ -1,0 +1,17 @@
+{
+    "name": "Mini Grey",
+    "side": 1,
+    "asset": "minigreya",
+    "boxColor": [62, 65, 79],
+    "boxShadeColor":[30, 33,49], 
+    "icon": "miniergrey",
+    "sound": "grey",
+    "animations": [
+        {
+        "anim": "kid",
+        "name": "minigrey kid",
+        "loop": false,
+        "offsets": [0,-210]
+        }
+    ]
+}

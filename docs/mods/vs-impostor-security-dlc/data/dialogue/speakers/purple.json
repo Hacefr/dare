@@ -1,0 +1,17 @@
+{
+    "name": "Purple",
+    "side": 0,
+    "asset": "purple",
+    "boxColor": [168, 43, 199],
+    "boxShadeColor": [80, 15, 143], 
+    "icon": "purple",
+    "sound": "porpol",
+    "animations": [
+        {
+        "anim": "purple",
+        "name": "purple purple",
+        "loop": false,
+        "offsets": [0,0]
+        }
+    ]
+}

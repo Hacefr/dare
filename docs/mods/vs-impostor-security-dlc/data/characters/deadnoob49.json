@@ -1,0 +1,37 @@
+{
+	"renderType": "animateatlas",
+	"version": "1.0.1",
+	"offsets": [
+		0,
+		0
+	],
+	"danceEvery": 2,
+	"scale": 1,
+	"name": "deadnoob49",
+	"cameraOffsets": [
+		0,
+		0
+	],
+	"flipX": false,
+	"isPixel": false,
+	"singTime": 6,
+	"startingAnimation": "idle",
+	"healthIcon": {
+		"id": "noob49",
+		"isPixel": false
+	},
+	"assetPath": "shared:characters/dlc/deadnoob49",
+	"animations": [
+		{
+			"frameIndices": [],
+			"prefix": "idle",
+			"offsets": [
+				-186,
+				-477
+			],
+			"frameRate": 24,
+			"name": "idle",
+			"looped": false
+		}
+	]
+}

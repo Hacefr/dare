@@ -1,0 +1,217 @@
+{
+ "version": "1.0.2",
+ "name": "Horse",
+ "props": [
+  {
+   "assetPath": "BG/horse/sky",
+   "atlasSettings": null,
+   "name": "sky",
+   "position": [-600, -380],
+   "scale": 1,
+   "startingAnimation": ""
+  },
+  {
+   "assetPath": "BG/horse/light",
+   "atlasSettings": null,
+   "blend": "add",
+   "name": "light",
+   "position": [1200, -700],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 1
+  },
+  {
+   "assetPath": "BG/horse/1",
+   "atlasSettings": null,
+   "name": "one",
+   "position": [-910, -200],
+   "scale": 1,
+   "scroll": [0.7, 0.7],
+   "startingAnimation": "",
+   "zIndex": 2
+  },
+  {
+   "assetPath": "BG/horse/2",
+   "atlasSettings": null,
+   "name": "two",
+   "position": [130, 380],
+   "scale": 1,
+   "scroll": [0.8, 0.8],
+   "startingAnimation": "",
+   "zIndex": 3
+  },
+  {
+   "assetPath": "BG/horse/3",
+   "atlasSettings": null,
+   "name": "three",
+   "position": [-600, 200],
+   "scale": 1,
+   "scroll": [0.9, 0.9],
+   "startingAnimation": "",
+   "zIndex": 4
+  },
+  {
+   "assetPath": "BG/horse/ground",
+   "atlasSettings": null,
+   "name": "ground",
+   "position": [-550, 660],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 5
+  },
+  {
+   "animations": [
+    {
+     "animType": null,
+     "assetPath": null,
+     "atlasSettings": null,
+     "looped": true,
+     "name": "idle",
+     "prefix": "trot",
+     "renderType": null
+    }
+   ],
+   "assetPath": "BG/horse/horses",
+   "atlasSettings": null,
+   "name": "horse1",
+   "position": [-2000, 380],
+   "scale": 1,
+   "startingAnimation": "idle",
+   "zIndex": 6
+  },
+  {
+   "animations": [
+    {
+     "animType": null,
+     "assetPath": null,
+     "atlasSettings": null,
+     "looped": true,
+     "name": "idle",
+     "prefix": "trot",
+     "renderType": null,
+     "frameRate": 28
+    }
+   ],
+   "assetPath": "BG/horse/horses",
+   "atlasSettings": null,
+   "name": "horse2",
+   "position": [-3500, 380],
+   "scale": 1,
+   "startingAnimation": "idle",
+   "zIndex": 7
+  },
+  {
+   "animations": [
+    {
+     "animType": null,
+     "assetPath": null,
+     "atlasSettings": null,
+     "looped": true,
+     "name": "idle",
+     "prefix": "trot",
+     "renderType": null,
+     "frameRate": 18
+    }
+   ],
+   "assetPath": "BG/horse/horses",
+   "atlasSettings": null,
+   "name": "horse3",
+   "position": [-3400, 380],
+   "scale": 1,
+   "startingAnimation": "idle",
+   "zIndex": 8
+  },
+  {
+   "animations": [
+    {
+     "animType": null,
+     "assetPath": null,
+     "atlasSettings": null,
+     "looped": true,
+     "name": "idle",
+     "prefix": "trot",
+     "renderType": null,
+     "frameRate": 12
+    }
+   ],
+   "assetPath": "BG/horse/horses",
+   "atlasSettings": null,
+   "name": "horse4",
+   "position": [-3480, 380],
+   "scale": 1,
+   "startingAnimation": "idle",
+   "zIndex": 9
+  },
+  {
+   "alpha": 0,
+   "animations": [
+    {
+     "animType": null,
+     "assetPath": null,
+     "atlasSettings": null,
+     "name": "idle",
+     "prefix": "idle",
+     "renderType": null
+    }
+   ],
+   "assetPath": "BG/horse/caughthorse",
+   "atlasSettings": null,
+   "name": "caught",
+   "position": [1400, 470],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 10
+  },
+  {
+   "assetPath": "BG/horse/front",
+   "atlasSettings": null,
+   "name": "front",
+   "position": [-700, 600],
+   "scale": 1,
+   "scroll": [1.1, 1.1],
+   "startingAnimation": "",
+   "zIndex": 350
+  },
+  {
+   "alpha": 0.11,
+   "assetPath": "BG/horse/subtract",
+   "atlasSettings": null,
+   "blend": "subtract",
+   "name": "subtract",
+   "position": [-595, -380],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 351
+  },
+  {
+   "alpha": 0.2,
+   "assetPath": "BG/horse/overlah",
+   "atlasSettings": null,
+   "blend": "lighten",
+   "name": "overlay",
+   "position": [-590, -380],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 352
+  }
+ ],
+ "characters": {
+  "bf": {
+   "cameraOffsets": [-100, -100],
+   "position": [1267.5, 885],
+   "zIndex": 300
+  },
+  "dad": {
+   "cameraOffsets": [150, -100],
+   "position": [183.5, 866],
+   "zIndex": 200
+  },
+  "gf": {
+   "cameraOffsets": [0, 0],
+   "position": [811.5, 719],
+   "scale": 0.9,
+   "zIndex": 100
+  }
+ },
+ "cameraZoom": 0.6
+}

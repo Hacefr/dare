@@ -1,0 +1,245 @@
+import funkin.play.stage.Stage;
+import funkin.play.PlayState;
+import funkin.play.cutscene.VideoCutscene;
+import funkin.play.PlayStatePlaylist;
+import flixel.addons.display.FlxBackdrop;
+import funkin.Paths;
+import openfl.display.BlendMode;
+import funkin.data.event.SongEventRegistry;
+import funkin.data.song.SongEventDataRaw;
+import funkin.modding.events.SongEventScriptEvent;
+import flixel.tweens.FlxEase;
+import legacy.objects.LegacyDialogueBox;
+
+class SecurityTwoStage extends Stage
+{
+    var hasPlayedCutscene:Bool; 
+    var hasPlayedDialogue:Bool;
+	var videoFinished:Bool = false;
+
+    var mist4:FlxBackdrop;
+    var mist5:FlxBackdrop;
+
+    var defaultCamZoom:Float;
+
+    public function new()
+    {
+        super('security2');
+        hasPlayedCutscene = false;
+        hasPlayedDialogue = false;
+    }
+
+    override function buildStage()
+    {
+        super.buildStage();
+
+        var mist4 = new FlxBackdrop(Paths.image('BG/secutiry/mistBack', 'shared'), 0x01);
+		mist4.scrollFactor.set(0.8, 0.8);
+		mist4.color = 0xFF5c5c5c;
+		mist4.alpha = 1;
+		mist4.velocity.x = 15;
+		mist4.scale.set(2,0.9);
+		mist4.blend = BlendMode.SCREEN;
+		mist4.zIndex = 3;
+		add(mist4);
+
+		var mist5 = new FlxBackdrop(Paths.image('BG/secutiry/mistMid', 'shared'), 0x01);
+		mist5.scrollFactor.set(0.5, 0.5);
+		mist5.color = 0xFF5c5c5c;
+		mist5.alpha = 1;
+		mist5.scale.set(2,0.9);
+		mist5.velocity.x = -15;
+		mist5.blend = BlendMode.SCREEN;
+		mist5.zIndex = 3;
+		add(mist5);
+		
+		mist4.y = mist5.y = -270;
+    }
+
+    function onSongLoaded(event)
+    {
+        super.onSongLoaded(event);
+
+        if(!PlayStatePlaylist.isStoryMode)
+        {
+            hasPlayedCutscene = true;
+            hasPlayedDialogue = true;
+        }
+    }
+
+    function onCountdownStart(event)
+    {
+        super.onCountdownStart(event);
+
+        PlayState.instance.tweenCameraToPosition(800, 450, 0);
+        LegacyUtils.camSpecialThing([650, 450], [700, 450]);
+
+        if(!hasPlayedCutscene)
+        {
+            event.cancel();
+            hasPlayedCutscene = true;
+            VideoCutscene.play(Paths.videos('suspect'));
+        }
+
+		VideoCutscene.onVideoEnded.add(function()
+        {
+            videoFinished = true;
+        });
+
+        if(hasPlayedCutscene && videoFinished && !hasPlayedDialogue)
+        {
+            event.cancel();
+            var dialogue = new LegacyDialogueBox('suspect');
+			hasPlayedDialogue = true;
+            PlayState.instance.add(dialogue);
+        }
+    }
+
+    function onSongRetry(event)
+    {
+        super.onSongRetry(event);
+
+        hasPlayedCutscene = true;
+        hasPlayedDialogue = true;
+    }
+
+    function onStepHit(event)
+    {
+        super.onStepHit(event);
+
+        switch (event.step)
+        {
+		case 0:
+            PlayState.instance.tweenCameraZoom(0.8, 8, true, FlxEase.quadIn);
+		case 48:
+			this.getNamedProp('loBlack').alpha = 1;
+			PlayState.instance.camHUD.visible = false;
+			LegacyUtils.camSpecialThing([500, 450], [850, 450]);
+		case 60:
+			this.getNamedProp('discuss').alpha = 1;
+		case 64:
+	this.getNamedProp('discuss').alpha = 0.001;
+	PlayState.instance.camHUD.visible = true;
+	defaultCamZoom = 0.75;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+	this.getNamedProp('loBlack').alpha = 0.001;
+
+case 176:
+	defaultCamZoom = 0.77;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+case 192:
+	defaultCamZoom = 0.70;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+case 304:
+	defaultCamZoom = 0.73;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+case 310:
+	defaultCamZoom = 0.76;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+case 316:
+	defaultCamZoom = 0.79;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+case 318:
+	defaultCamZoom = 0.81;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+case 320:
+	defaultCamZoom = 0.7;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadInOut);
+
+case 448:
+	defaultCamZoom = 0.75;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.1, true, FlxEase.quadOut);
+	detective();
+
+        case 460:
+			pico();
+		case 464:
+			detective();
+		case 476:
+			pico();
+		case 480:
+			detective();
+		case 492:
+			pico();
+
+case 496:
+	defaultCamZoom = 0.7;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 1.5, true, FlxEase.quadOut);
+
+case 576:
+	defaultCamZoom = 0.72;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+case 704:
+	defaultCamZoom = 0.76;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+case 800:
+	defaultCamZoom = 0.78;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+case 804:
+	defaultCamZoom = 0.79;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+case 805:
+	this.getBoyfriend().playAnimation('lock in', true);
+	this.getNamedProp('player').playAnimation('die', true);
+
+case 808:
+	defaultCamZoom = 0.8;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+case 812:
+	defaultCamZoom = 0.81;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+	this.getBoyfriend().playAnimation('cock', true);
+	this.getDad().playAnimation('singRIGHT', true);
+
+case 813:
+	this.getDad().playAnimation('singRIGHT', true);
+
+case 814:
+	this.getDad().playAnimation('singRIGHT', true);
+
+case 815:
+	this.getDad().playAnimation('singRIGHT', true);
+
+case 814:
+	defaultCamZoom = 0.7;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.expoInOut);
+
+	case 816:
+	    	this.getBoyfriend().playAnimation('blast', true);
+			this.getDad().playAnimation('shock', true, true);
+
+case 824:
+	defaultCamZoom = 0.72;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+
+case 842:
+	defaultCamZoom = 0.7;
+	PlayState.instance.tweenCameraZoom(defaultCamZoom, 0.5, true, FlxEase.quadOut);
+        }
+    }
+
+	function detective():Void // cuz camera follow module is based on song event rather than position
+	{
+		var camEvent:SongEventScriptEvent = new SongEventScriptEvent(new SongEventDataRaw(1, 'FocusCamera', {char: -1, duration: 4, ease: "INSTANT", easeDir: "In", x: 500, y: 450}));
+		PlayState.instance.dispatchEvent(camEvent);
+		SongEventRegistry.handleEvent(new SongEventDataRaw(1, 'FocusCamera', {char: -1, duration: 4, ease: "INSTANT", easeDir: "In", x: 500, y: 450}));
+	}
+
+	function pico():Void
+	{
+		var camEvent:SongEventScriptEvent = new SongEventScriptEvent(new SongEventDataRaw(1, 'FocusCamera', {char: -1, duration: 4, ease: "INSTANT", easeDir: "In", x: 850, y: 450}));
+		PlayState.instance.dispatchEvent(camEvent);
+		SongEventRegistry.handleEvent(new SongEventDataRaw(1, 'FocusCamera', {char: -1, duration: 4, ease: "INSTANT", easeDir: "In", x: 850, y: 450}));
+	}
+}
