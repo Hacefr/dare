@@ -1,0 +1,40 @@
+{
+ "version": "2.2.4",
+ "songName": "Trot Away",
+ "artist": "DeepFriedBolognese & Kakow0",
+ "charter": "emi3",
+ "offsets": { },
+ "playData": {
+  "difficulties": [
+   "easy",
+   "normal",
+   "hard"
+  ],
+  "characters": {
+   "player": "bfweirdsheriff",
+   "girlfriend": "gfweird-sheriff",
+   "opponent": "horsemate",
+   "opponentVocals": [
+    "horsemate"
+   ],
+   "playerVocals": []
+  },
+  "stage": "horse",
+  "noteStyle": "impostor",
+  "ratings": {
+   "hard": 0
+  },
+  "album": "volume1",
+  "stickerPack": "default",
+  "previewEnd": 0
+ },
+ "generatedBy": "Friday Night Funkin' - v0.8.5",
+ "timeChanges": [
+  {
+   "t": 0,
+   "b": 0,
+   "bpm": 133,
+   "bt": [4, 4, 4, 4]
+  }
+ ]
+}

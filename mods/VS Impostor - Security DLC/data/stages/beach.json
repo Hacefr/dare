@@ -1,0 +1,90 @@
+{
+ "version": "1.0.2",
+ "name": "Beach",
+ "props": [
+  {
+   "assetPath": "BG/beach/sky",
+   "atlasSettings": null,
+   "name": "bg",
+   "position": [-700, -290],
+   "scale": 1,
+   "startingAnimation": ""
+  },
+  {
+   "assetPath": "BG/beach/sun",
+   "atlasSettings": null,
+   "blend": "add",
+   "name": "sun",
+   "position": [705, 138],
+   "scale": 1,
+   "scroll": [0.98, 0.98],
+   "startingAnimation": "",
+   "zIndex": 1
+  },
+  {
+   "assetPath": "BG/beach/land",
+   "atlasSettings": null,
+   "name": "land",
+   "position": [-700, 418],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 2
+  },
+  {
+   "assetPath": "BG/beach/sea",
+   "atlasSettings": null,
+   "name": "sea",
+   "position": [-700, 418],
+   "scale": 1,
+   "startingAnimation": "",
+   "zIndex": 3
+  },
+  {
+   "assetPath": "BG/beach/subtract",
+   "atlasSettings": null,
+   "blend": "subtract",
+   "name": "subtract",
+   "position": [-830, -395],
+   "scale": 2.2,
+   "startingAnimation": "",
+   "zIndex": 350
+  },
+  {
+   "assetPath": "BG/beach/bluesubtract",
+   "atlasSettings": null,
+   "blend": "subtract",
+   "name": "bluesubtract",
+   "position": [-800, -330],
+   "scale": 2.2,
+   "startingAnimation": "",
+   "zIndex": 351
+  },
+  {
+   "assetPath": "BG/beach/add",
+   "atlasSettings": null,
+   "blend": "add",
+   "name": "glow",
+   "position": [-665, -410],
+   "scale": 2.2,
+   "startingAnimation": "",
+   "zIndex": 352
+  }
+ ],
+ "characters": {
+  "bf": {
+   "cameraOffsets": [-100, -100],
+   "position": [1736, 1030],
+   "zIndex": 300
+  },
+  "dad": {
+   "cameraOffsets": [150, -100],
+   "position": [345.5, 1064.7],
+   "zIndex": 200
+  },
+  "gf": {
+   "cameraOffsets": [0, 0],
+   "position": [931.5, 876],
+   "zIndex": 100
+  }
+ }
+}

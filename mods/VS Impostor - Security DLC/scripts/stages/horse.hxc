@@ -1,0 +1,163 @@
+import funkin.play.stage.Stage;
+import funkin.play.PlayState;
+import legacy.shaders.ExtraDropShadowShader;
+import flixel.tweens.FlxEase;
+import flixel.util.FlxColor;
+
+class HorseStage extends Stage
+{
+    public function new()
+    {
+        super('horse');
+    }
+
+    public var darkShader:ExtraDropShadowShader;
+    public var darkShader2:ExtraDropShadowShader;
+    var defaultCamZoom:Float;
+
+    function onCountdownStart(event)
+    {
+        super.onCountdownStart(event);
+
+        darkShader = new ExtraDropShadowShader();
+        darkShader.threshold = .03;
+        darkShader.setHollowColorMatrix([
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 1, 0
+        ]);
+        darkShader.setColorMatrix([
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0,
+            0, 0, 0, 1, 0
+        ]);
+        darkShader.antialiasStages = 4;
+	
+        darkShader.attachedSprite = this.getBoyfriend();
+
+        darkShader2 = new ExtraDropShadowShader();
+	
+        darkShader2.threshold = .03;
+        darkShader2.setHollowColorMatrix([
+            0, 0, 0, 0, 145,
+            0, 0, 0, 0, 94,
+            0, 0, 0, 0, 56,
+            0, 0, 0, 1, 0
+        ]);
+        darkShader2.setColorMatrix([
+            0, 0, 0, 0, 145,
+            0, 0, 0, 0, 94,
+            0, 0, 0, 0, 56,
+            0, 0, 0, 1, 0
+        ]);
+        darkShader2.antialiasStages = 4;
+
+        darkShader2.attachedSprite = this.getGirlfriend();
+
+        this.getBoyfriend()._data.atlasSettings.useRenderTexture = true;
+        this.getBoyfriend().shader = null;
+
+        this.getGirlfriend()._data.atlasSettings.useRenderTexture = true;
+        this.getGirlfriend().shader = null;
+
+        this.getGirlfriend().color = 0xFFDDDDDD;
+
+        PlayState.instance.tweenCameraToPosition(900, 380, 0);
+        LegacyUtils.camSpecialThing([540, 380], [900, 380]);
+
+        PlayState.instance.iconP2.zIndex = PlayState.instance.iconP1.zIndex + 2;
+        PlayState.instance.refresh();
+    }
+
+    function onBeatHit(event)
+    {
+        super.onBeatHit(event);
+
+        if (event.beat % 2 == 0) this.getNamedProp('caught').playAnimation('idle', true);
+    }
+
+function onStepHit(event)
+{
+    super.onStepHit(event);
+
+	switch (event.step)
+	{
+        case 64:
+            LegacyUtils.camSpecialThing([540, 400], [900, 400]);
+
+        case 464:
+            defaultCamZoom = 0.85;
+            LegacyUtils.camSpecialThing([540, 400], [1200, 430]);
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 3, true, FlxEase.quadOut);
+
+        case 506:
+            defaultCamZoom = 0.6;
+            LegacyUtils.camSpecialThing([540, 380], [540, 380]);
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 1, true, FlxEase.quadOut);
+
+        case 520:
+            LegacyUtils.camSpecialThing([540, 380], [900, 380]);
+
+        case 640:
+            defaultCamZoom = 0.85;
+            LegacyUtils.camSpecialThing([540, 380], [1200, 430]);
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 3, true, FlxEase.quadOut);
+
+        case 704:
+            defaultCamZoom = 0.6;
+            LegacyUtils.camSpecialThing([540, 380], [900, 380]);
+            PlayState.instance.tweenCameraZoom(defaultCamZoom, 2, true, FlxEase.quadOut);
+
+        case 828:
+            LegacyUtils.camSpecialThing([720, 380], [720, 380]);
+
+        case 840:
+            lightsOut();
+            LegacyUtils.camSpecialThing([540, 380], [900, 380]);
+            this.getNamedProp('horse1').velocity.x = 200;
+            this.getNamedProp('horse2').velocity.x = 260;
+            this.getNamedProp('horse3').velocity.x = 190;
+            this.getNamedProp('horse4').velocity.x = 165;
+
+        case 1096:
+            lightsOn();
+            this.getNamedProp('horse1').alpha = 0.001;
+            this.getNamedProp('horse2').alpha = 0.001;
+            this.getNamedProp('horse3').alpha = 0.001;
+            this.getNamedProp('horse4').alpha = 0.001;
+            this.getNamedProp('caught').alpha = 1;
+
+        case 1224:
+            LegacyUtils.camSpecialThing([720, 300], [720, 300]);
+    }
+}
+
+    function lightsOut()
+    {
+        isDark = true;
+        PlayState.instance.iconP1.shader = darkShader;
+		PlayState.instance.iconP2.shader = darkShader;
+        this.getDad().shader = darkShader;
+        this.getGirlfriend().shader = darkShader2;
+		this.getBoyfriend().shader = darkShader;
+        PlayState.instance.healthBar.createFilledBar(FlxColor.BLACK, FlxColor.BLACK);
+        PlayState.instance.camGame.flash(FlxColor.BLACK, 1);
+        this.getNamedProp('subtract').alpha = 0.5;
+    }
+
+    function lightsOn()
+    {
+        PlayState.instance.camGame.flash(FlxColor.BLACK, 0.35);
+        isDark = false;
+        PlayState.instance.iconP1.shader = null;
+		PlayState.instance.iconP2.shader = null;
+        this.getDad().shader = null;
+        this.getGirlfriend().shader = null;
+		this.getBoyfriend().shader = null;
+        PlayState.instance.healthBar.createFilledBar(-9471477, -8222273);  
+        this.getNamedProp('subtract').alpha = 0.11;
+        this.getNamedProp('overlay').alpha = 0.001;
+    }
+}
