@@ -1,0 +1,10 @@
+:detective:normal:This is a massacre.
+:picodlc:serious:so...
+:picodlc:serious:you do it?
+:detective:what:What?
+:detective:normal:Course not.
+:picodlc:normal:alright boss then who did it.
+:detective:think:I've got an idea.
+:detective:normal:I think Black killed them.
+:picodlc:serious:but you're black
+:detective:think:Hm...

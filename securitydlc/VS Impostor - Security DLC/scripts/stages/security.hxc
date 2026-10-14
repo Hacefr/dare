@@ -1,0 +1,100 @@
+import funkin.play.stage.Stage;
+import funkin.play.PlayState;
+import funkin.play.cutscene.VideoCutscene;
+import funkin.play.PlayStatePlaylist;
+import legacy.objects.LegacyDialogueBox;
+
+class SecurityStage extends Stage
+{
+    var hasPlayedCutscene:Bool; 
+    var hasPlayedDialogue:Bool;
+
+    var dialogue:LegacyDialogueBox;
+    var videoFinished:Bool = false;
+
+    public function new()
+    {
+        super('security');
+        hasPlayedCutscene = false;
+        hasPlayedDialogue = false;
+        videoFinished = false;
+    }
+
+    function onBeatHit(event)
+    {
+        super.onBeatHit(event);
+
+        if (event.beat % 2 == 0)
+        {
+            this.getNamedProp('shit').playAnimation('idle', true);
+        }
+        if (event.beat % 1 == 0)
+        {
+            this.getNamedProp('tawny').playAnimation('idle', true);
+            this.getNamedProp('graypet').playAnimation('idle', true);
+        }
+    }
+
+    function onSongLoaded(event)
+    {
+        super.onSongLoaded(event);
+
+        if(!PlayStatePlaylist.isStoryMode)
+        {
+            hasPlayedCutscene = true;
+            hasPlayedDialogue = true;
+            videoFinished = true;
+        }
+    }
+
+    function onCountdownStart(event)
+    {
+        super.onCountdownStart(event);
+
+        PlayState.instance.tweenCameraToPosition(800, 450, 0);
+        LegacyUtils.camSpecialThing([500, 450], [850, 450]);
+
+        if(!hasPlayedCutscene)
+        {
+            event.cancel();
+            hasPlayedCutscene = true;
+            VideoCutscene.play(Paths.videos('49'));
+        }
+
+        VideoCutscene.onVideoEnded.add(function()
+        {
+            videoFinished = true;
+        });
+
+        if(hasPlayedCutscene && videoFinished && !hasPlayedDialogue)
+        {
+            event.cancel();
+
+            if(dialogue == null) dialogue = new LegacyDialogueBox('49');
+            PlayState.instance.add(dialogue);
+            hasPlayedDialogue = true;
+        }
+    }
+
+    function onSongRetry(event)
+    {
+        super.onSongRetry(event);
+
+        hasPlayedCutscene = true;
+        hasPlayedDialogue = true;
+        videoFinished = true;
+    }
+
+    function onStepHit(event)
+    {
+        super.onStepHit(event);
+
+        if (event.step == 993)
+        {
+            this.getNamedProp('graypet').alpha = 0.001;
+            this.getNamedProp('deadtawny').alpha = 1;
+            this.getNamedProp('tawny').alpha = 0.001;
+            LegacyUtils.camSpecialThing([270, 450], [850, 450]);
+        }
+    }
+}
