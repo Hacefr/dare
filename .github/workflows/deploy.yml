@@ -20,3 +20,4 @@ jobs:
         with:
           folder: export/release/html5/bin
           branch: gh-pages
+# Trigger build v1
